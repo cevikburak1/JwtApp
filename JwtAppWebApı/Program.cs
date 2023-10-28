@@ -1,3 +1,6 @@
+using JwtAppWebApý.Persistance.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<JwtAndCQRSAppContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("local"));
+});
 
 var app = builder.Build();
 
