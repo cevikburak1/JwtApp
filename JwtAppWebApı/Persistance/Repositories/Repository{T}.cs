@@ -1,38 +1,51 @@
 ﻿using JwtAppWebApı.Core.Application.Interfaces;
+using JwtAppWebApı.Persistance.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace JwtAppWebApı.Persistance.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        public Task CreateAsync(T entity)
+        private readonly JwtAndCQRSAppContext context;
+
+        public Repository(JwtAndCQRSAppContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Task<List<T>> GetAllAsnyc()
+        public async  Task CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+           await this.context.Set<T>().AddAsync(entity);
+           await this.context.SaveChangesAsync();
         }
 
-        public Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public async Task<List<T>> GetAllAsnyc()
         {
-            throw new NotImplementedException();
+            return await this.context.Set<T>().AsNoTracking().ToListAsync();
+
         }
 
-        public Task<T> GetByIdAsync(object id)
+        public async Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            return await this.context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter);
         }
 
-        public Task RemoveAsync(T entity)
+        public async Task<T?> GetByIdAsync(object id)
         {
-            throw new NotImplementedException();
+            return await this.context.Set<T>().FindAsync(id);
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+            this.context.Set<T>().Remove(entity);
+           await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            this.context.Set<T>().Update(entity);
+            await this.context.SaveChangesAsync();
         }
     }
 }

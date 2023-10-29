@@ -1,4 +1,6 @@
+using JwtAppWebApý.Core.Application.Interfaces;
 using JwtAppWebApý.Persistance.Context;
+using JwtAppWebApý.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<JwtAndCQRSAppContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("local"));
 });
+
+builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
 
 var app = builder.Build();
 
