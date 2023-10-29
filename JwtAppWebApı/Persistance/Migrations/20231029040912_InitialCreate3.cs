@@ -4,7 +4,7 @@
 
 namespace JwtAppWebApı.Persistance.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,8 +42,7 @@ namespace JwtAppWebApı.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppRoleId = table.Column<int>(type: "int", nullable: false),
-                
+                    AppRoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +53,6 @@ namespace JwtAppWebApı.Persistance.Migrations
                         principalTable: "AppRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                   
                 });
 
             migrationBuilder.CreateTable(
@@ -66,8 +64,7 @@ namespace JwtAppWebApı.Persistance.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-               
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,7 +75,6 @@ namespace JwtAppWebApı.Persistance.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                  
                 });
 
             migrationBuilder.CreateIndex(
@@ -86,14 +82,10 @@ namespace JwtAppWebApı.Persistance.Migrations
                 table: "AppUsers",
                 column: "AppRoleId");
 
-            
-
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

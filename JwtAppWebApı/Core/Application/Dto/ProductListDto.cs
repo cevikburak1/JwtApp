@@ -1,6 +1,6 @@
-﻿namespace JwtAppWebApı.Core.Domain
+﻿namespace JwtAppWebApı.Core.Application.Dto
 {
-    public class Product
+    public class ProductListDto
     {
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -11,12 +11,5 @@
 
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
-
-        public Product()
-        {
-            Category = new Category();
-        }
-       
     }
 }

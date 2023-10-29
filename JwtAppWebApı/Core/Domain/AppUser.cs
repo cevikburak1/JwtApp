@@ -13,7 +13,9 @@
 
         public AppUser()
         {
-            AppRole= new AppRole();
+            AppRole = new AppRole();
         }
+
+        
     }
 }

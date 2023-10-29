@@ -48,9 +48,6 @@ namespace JwtAppWebApı.Persistance.Migrations
                     b.Property<int>("AppRoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AppRoleId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -60,8 +57,6 @@ namespace JwtAppWebApı.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppRoleId");
-
-                    b.HasIndex("AppRoleId1");
 
                     b.ToTable("AppUsers");
                 });
@@ -93,9 +88,6 @@ namespace JwtAppWebApı.Persistance.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -109,22 +101,14 @@ namespace JwtAppWebApı.Persistance.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
-
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("JwtAppWebApı.Core.Domain.AppUser", b =>
                 {
-                    b.HasOne("JwtAppWebApı.Core.Domain.AppRole", null)
+                    b.HasOne("JwtAppWebApı.Core.Domain.AppRole", "AppRole")
                         .WithMany("AppUsers")
                         .HasForeignKey("AppRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JwtAppWebApı.Core.Domain.AppRole", "AppRole")
-                        .WithMany()
-                        .HasForeignKey("AppRoleId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -133,15 +117,9 @@ namespace JwtAppWebApı.Persistance.Migrations
 
             modelBuilder.Entity("JwtAppWebApı.Core.Domain.Product", b =>
                 {
-                    b.HasOne("JwtAppWebApı.Core.Domain.Category", null)
+                    b.HasOne("JwtAppWebApı.Core.Domain.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JwtAppWebApı.Core.Domain.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
