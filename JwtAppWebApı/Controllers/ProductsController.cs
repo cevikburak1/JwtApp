@@ -22,5 +22,16 @@ namespace JwtAppWebApı.Controllers
             var data = await this.mediator.Send(new GetAllProductsQueryRequest());
             return Ok(data);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await this.mediator.Send(new GetProductQueryRequest(id));
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
     }
 }
