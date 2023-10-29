@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace JwtAppWebApı.Migrations
+namespace JwtAppWebApı.Persistance.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -43,7 +43,7 @@ namespace JwtAppWebApı.Migrations
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppRoleId = table.Column<int>(type: "int", nullable: false),
-             
+                
                 },
                 constraints: table =>
                 {
@@ -67,7 +67,7 @@ namespace JwtAppWebApı.Migrations
                     Stock = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-         
+               
                 },
                 constraints: table =>
                 {
@@ -76,8 +76,9 @@ namespace JwtAppWebApı.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
-                   
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                  
                 });
 
             migrationBuilder.CreateIndex(
@@ -85,7 +86,7 @@ namespace JwtAppWebApı.Migrations
                 table: "AppUsers",
                 column: "AppRoleId");
 
-          
+            
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",

@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace JwtAppWebApı.Migrations
+namespace JwtAppWebApı.Persistance.Migrations
 {
     [DbContext(typeof(JwtAndCQRSAppContext))]
-    [Migration("20231028233312_InitialCreate")]
+    [Migration("20231029024806_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

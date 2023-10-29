@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace JwtAppWebApı.Migrations
+namespace JwtAppWebApı.Persistance.Migrations
 {
     [DbContext(typeof(JwtAndCQRSAppContext))]
     partial class JwtAndCQRSAppContextModelSnapshot : ModelSnapshot
