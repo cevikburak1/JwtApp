@@ -9,12 +9,9 @@
 
         public int AppRoleId { get; set; }
 
-        public AppRole AppRole { get; set; }
+        public AppRole? AppRole { get; set; }
 
-        public AppUser()
-        {
-            AppRole = new AppRole();
-        }
+       
 
         
     }
