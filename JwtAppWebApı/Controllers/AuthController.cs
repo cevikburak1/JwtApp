@@ -1,4 +1,5 @@
 ﻿using JwtAppWebApı.Core.Application.Features.CQRS.Commands;
+using JwtAppWebApı.Core.Application.Features.CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,26 @@ namespace JwtAppWebApı.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> Register(RegisterUserCommandRequest reguest)
         {
             await this.mediator.Send(reguest);
             return Created("", reguest);
         }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(CheckUserQueryRequest reguest)
+        {
+            var dto = await this.mediator.Send(reguest);
+            if (dto.IsExist)
+            {
+                return Created("", "token oluştur");
+            }
+            else
+            {
+                return BadRequest("Kullanıcı Adı veya Şifre Hatalı");
+            }
+        }
+       
+
     }
 }
