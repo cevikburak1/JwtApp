@@ -53,7 +53,7 @@ namespace JwtAppWebApı.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await this.mediator.Send(new DeleteCategoryCommandRequest(id));
-            return NoContent();
+            return Ok();
         }
 
     }
