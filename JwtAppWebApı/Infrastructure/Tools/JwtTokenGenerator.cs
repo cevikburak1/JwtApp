@@ -26,7 +26,7 @@ namespace JwtAppWebApı.Infrastructure.Tools
             var expireDate = DateTime.UtcNow.AddMinutes(JwtTokenDefaults.Expire);
 
 
-            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(JwtTokenDefaults.ValidIssuer, JwtTokenDefaults.ValidAudience, claims:null,notBefore:DateTime.UtcNow,expires: expireDate, signingCredentials: credentials);
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(JwtTokenDefaults.ValidIssuer, JwtTokenDefaults.ValidAudience, claims: claims, notBefore:DateTime.UtcNow,expires: expireDate, signingCredentials: credentials);
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             return new TokenResponseDto(handler.WriteToken(jwtSecurityToken), expireDate);
         }
