@@ -1,11 +1,13 @@
 ﻿using JwtAppWebApı.Core.Application.Features.CQRS.Commands;
 using JwtAppWebApı.Core.Application.Features.CQRS.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwtAppWebApı.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase

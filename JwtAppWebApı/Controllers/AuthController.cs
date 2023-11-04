@@ -1,8 +1,10 @@
 ﻿using JwtAppWebApı.Core.Application.Features.CQRS.Commands;
 using JwtAppWebApı.Core.Application.Features.CQRS.Queries;
+using JwtAppWebApı.Infrastructure.Tools;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace JwtAppWebApı.Controllers
 {
@@ -29,7 +31,8 @@ namespace JwtAppWebApı.Controllers
             var dto = await this.mediator.Send(reguest);
             if (dto.IsExist)
             {
-                return Created("", "token oluştur");
+     
+                return Created("", JwtTokenGenerator.GenereateToken(dto));
             }
             else
             {
